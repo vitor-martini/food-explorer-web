@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+  :root {
+    font-size: 62.5%;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -15,7 +19,7 @@ export default createGlobalStyle`
   
   body, input, button, textarea {
      font-family: "Poppins", sans-serif;
-     font-size: 16px;
+     font-size: 1.6rem;
      outline: none;
   }
 
@@ -25,6 +29,7 @@ export default createGlobalStyle`
 
   button, a {
     cursor: pointer;
+    border: none;
     transition: filter 0.2s;
   }
 
