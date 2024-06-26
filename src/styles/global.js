@@ -12,13 +12,14 @@ export default createGlobalStyle`
   }
 
   body { 
-    background-color: ${({ theme }) => theme.COLORS.DARK_900};
+    background-color: ${({ theme }) => theme.COLORS.DARK_700};
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
     -webkit-font-smoothing: antialiased;
   }
   
   body, input, button, textarea {
      font-family: "Poppins", sans-serif;
+     color: ${({ theme }) => theme.COLORS.LIGHT_100 };
      font-size: 1.6rem;
      outline: none;
   }
