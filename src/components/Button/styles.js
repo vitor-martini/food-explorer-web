@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.button`
-  width: 100%;
   padding: 1.2rem 2.4rem;
   border-radius: 5px;
   background-color: ${({ bgColor, theme }) => bgColor || theme.COLORS.TOMATO_100 };

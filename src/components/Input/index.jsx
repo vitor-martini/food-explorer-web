@@ -1,8 +1,8 @@
 import { Container } from "./styles";
 
-export function Input({ icon: Icon, label, inputId, ...rest }) {
+export function Input({ icon: Icon, label, inputId, phTextAlign, ...rest }) {
   return (
-    <Container>
+    <Container phTextAlign={phTextAlign}>
       { Icon && <Icon/> }
       <label className="sr-only" htmlFor={ inputId }> { label }</label>
       <input 
