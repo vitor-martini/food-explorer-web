@@ -10,4 +10,5 @@ export const Container = styled.button`
   justify-content: center;
   align-content: center;
   gap: 0.8rem;
+  white-space: nowrap
 `;
