@@ -7,7 +7,6 @@ export function Input({ icon: Icon, label, inputId, phTextAlign, ...rest }) {
       <label className="sr-only" htmlFor={ inputId }> { label }</label>
       <input 
         {...rest} 
-        placeholder={label}
         id={ inputId } 
       />
     </Container>
