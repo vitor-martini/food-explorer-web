@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   max-width: 304px;
@@ -41,6 +42,11 @@ export const Dish = styled.div`
 `;
 
 export const Options = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+      flex-direction: column;
+  }
 `;
