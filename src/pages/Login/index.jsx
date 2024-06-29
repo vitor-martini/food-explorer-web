@@ -2,8 +2,12 @@ import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { Container, LogoContainer, CardContainer, InputContainer } from "./styles";
 import Logo from "../../assets/logo.svg";
+import { useMediaQuery } from "react-responsive";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export function Login() {
+  const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
+
   return (
     <Container>
       <LogoContainer>
@@ -12,13 +16,18 @@ export function Login() {
       </LogoContainer>
 
       <CardContainer>
-        <h2>Faça login</h2>
+        {
+          !isMobile && (
+            <h2>Faça login</h2>
+          )
+        }
 
         <InputContainer>
           <label htmlFor="email">Email</label>
           <Input
             label={"Email"}
             inputId={"email"}
+            placeholder={"Seu email"}
           />
         </InputContainer>
 
@@ -28,6 +37,7 @@ export function Login() {
             label={"Senha"}
             inputId={"password"}
             type={"password"}
+            placeholder={"Sua senha"}
           />
         </InputContainer>
 
