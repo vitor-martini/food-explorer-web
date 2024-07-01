@@ -4,9 +4,23 @@ import { Container, LogoContainer, CardContainer, InputContainer } from "./style
 import Logo from "../../assets/logo.svg";
 import { useMediaQuery } from "react-responsive";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
 
 export function Login() {
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { logIn } = useAuth();
+
+  async function handleLogIn() {
+    if(!email || !password) {
+      alert("Preencha todos os campos!");
+      return;
+    }
+    await logIn({ email, password });
+  }
 
   return (
     <Container>
@@ -28,6 +42,7 @@ export function Login() {
             label={"Email"}
             inputId={"email"}
             placeholder={"Seu email"}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </InputContainer>
 
@@ -38,15 +53,17 @@ export function Login() {
             inputId={"password"}
             type={"password"}
             placeholder={"Sua senha"}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </InputContainer>
 
         <Button
           title={"Entrar"}
           width={"100%"}
+          onClick={handleLogIn}
         />
 
-        <a href="#">Criar uma conta</a>
+        <Link to="/signup">Criar uma conta</Link>
       </CardContainer>
     </Container>
   );
