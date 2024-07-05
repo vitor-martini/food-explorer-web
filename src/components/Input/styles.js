@@ -7,8 +7,8 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  max-width: 600px;
   width: 100%;
+  max-width: ${({ $maxWidth }) => $maxWidth || "auto"};
 
   > input {
     background-color: transparent;
@@ -17,7 +17,7 @@ export const Container = styled.div`
 
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.LIGHT_500 };
-      text-align: ${({ phTextAlign }) => phTextAlign || "left" };
+      text-align: ${({ $phTextAlign }) => $phTextAlign || "left" };
     }
   }
 `;
