@@ -39,6 +39,12 @@ export default createGlobalStyle`
     filter: brightness(0.9);
   }
 
+  ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
   .sr-only {
     position: absolute;
     width: 1px;
