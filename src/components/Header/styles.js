@@ -10,7 +10,7 @@ export const MobileContainer = styled.div`
 
 export const Notification = styled.div`
   position: absolute;
-  top: 2px; 
+  top: -8px; 
   right: -8px; 
   background-color: ${({ theme }) => theme.COLORS.TOMATO_200};
   border-radius: 50%;

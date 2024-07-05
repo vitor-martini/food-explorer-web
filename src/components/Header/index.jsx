@@ -12,10 +12,12 @@ import { useMediaQuery } from "react-responsive";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 import { useAuth } from "../../hooks/auth";
 import { useState } from "react";
+import { useCart } from "../../hooks/cart";
 
 export function Header() {
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
   const { user, logOut } = useAuth();
+  const { cart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -51,7 +53,7 @@ export function Header() {
                     <IconButton
                       icon={Receipt}
                     /> 
-                    <Notification>1</Notification>
+                    <Notification>{cart.order.length}</Notification>
                   </MenuWrapper>
                 )
             }
@@ -83,7 +85,7 @@ export function Header() {
               
               (<Button
                 icon={Receipt}
-                title="Pedidos (0)"
+                title={`Pedidos (${cart.order.length})`}
               />) 
             }
       
