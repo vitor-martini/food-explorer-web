@@ -1,17 +1,26 @@
 import { MobileContainer, Container, Logo, Title, MenuWrapper, Notification } from "./styles";
 import { Input } from "../Input";
 import { Button } from "../Button";
+import { Menu } from "../Menu";
 import { IconButton } from "../IconButton";
 import { Search } from "../../icons/Search";
 import { Receipt } from "../../icons/Receipt";
 import { Out } from "../../icons/Out";
-import { Menu } from "../../icons/Menu";
+import { Menu as MenuIcon } from "../../icons/Menu";
 import logo from "../../assets/logo.svg";
 import { useMediaQuery } from "react-responsive";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
+import { useAuth } from "../../hooks/auth";
+import { useState } from "react";
 
 export function Header() {
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
+  const { user, logOut } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function toggleMenu() {
+    setMenuOpen(!menuOpen);
+  }
 
   return (
     <>
@@ -19,21 +28,33 @@ export function Header() {
         isMobile ? (
           <MobileContainer>
             <IconButton
-              icon={Menu}
+              onClick={toggleMenu}
+              icon={MenuIcon}
+            />
+            <Menu 
+              isOpen={menuOpen}
+              toggleMenu={toggleMenu}
             />
             <Logo>
               <img src={logo} alt="Logo" />
               <Title>
                 <h1>food explorer</h1>
-                <small>admin</small>
+                {
+                  user.is_admin && <small>admin</small>
+                }
               </Title>
             </Logo>
-            <MenuWrapper>
-              <IconButton
-                icon={Receipt}
-              />
-              <Notification>1</Notification>
-            </MenuWrapper>
+            {
+              !user.is_admin && 
+                ( 
+                  <MenuWrapper>
+                    <IconButton
+                      icon={Receipt}
+                    /> 
+                    <Notification>1</Notification>
+                  </MenuWrapper>
+                )
+            }
           </MobileContainer>
         ) : (
           <Container>
@@ -41,7 +62,9 @@ export function Header() {
               <img src={logo} alt="Logo" />
               <Title>
                 <h1>food explorer</h1>
-                <small>admin</small>
+                {
+                  user.is_admin && <small>admin</small>
+                }
               </Title>
             </Logo>
   
@@ -50,15 +73,23 @@ export function Header() {
               label={"Busque por pratos ou ingredients"}
               inputId={"search"}
               phTextAlign={"center"}
+              maxWidth={"600px"}
             />
 
-            <Button
-              icon={Receipt}
-              title="Pedidos (0)"
-            />
+            {
+              user.is_admin ? (<Button
+                title="Novo prato"
+              />) : 
+              
+              (<Button
+                icon={Receipt}
+                title="Pedidos (0)"
+              />) 
+            }
       
             <IconButton
               icon={Out}
+              onClick={logOut}
             />
           </Container>
         )

@@ -4,7 +4,8 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 export const MobileContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 2.8rem;
+  align-items: center;
+  padding: 5.6rem 2.8rem 2.4rem;
 `;
 
 export const Notification = styled.div`
@@ -41,6 +42,12 @@ export const Logo = styled.div`
   display: flex;
   align-items: center;
   gap: 1.2rem;
+  
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.SM}px) {
     > img {
