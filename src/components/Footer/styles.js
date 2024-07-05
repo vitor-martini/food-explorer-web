@@ -2,10 +2,15 @@ import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.footer`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  margin: 2.4rem 0;
+  padding: 2.4rem;
+  background-color: ${({ theme }) => theme.COLORS.DARK_600};
 
   > p {
     color: ${({ theme }) => theme.COLORS.LIGHT_200 };
