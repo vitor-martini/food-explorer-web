@@ -13,6 +13,7 @@ export const Container = styled.div`
 
   > h1 {
     font-size: 2.4rem;
+    text-align: center;
   }
 
   > p {
@@ -26,6 +27,22 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.CAKE_100 };
     font-weight: 400;
   }
+
+  width: 30.4rem;
+  height: 46.2rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+    width: 21rem;
+    height: 29.2rem;
+
+    > h1 {
+      font-size: 1.4rem;
+    }
+
+    > h2 {
+      font-size: 1.6rem;
+    }
+  }
 `;
 
 export const Dish = styled.div`
@@ -33,11 +50,18 @@ export const Dish = styled.div`
   > img {
     width: 180px;
     height: 180px;
+    border-radius: 8px;
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+      width: 88px;
+      height: 88px;
+    }
   }
 
   .icon-button {
     position: absolute;
     top: 8px;
+    right: -32px;
   }
 `;
 

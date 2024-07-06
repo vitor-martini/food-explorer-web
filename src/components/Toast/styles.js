@@ -8,8 +8,8 @@ export const ToastContainer = styled.div`
 `;
 
 export const ToastMessage = styled.div`
-  background-color: ${({ bgColor, theme }) => bgColor || theme.COLORS.TOMATO_100 };
-  color: ${({ color, theme }) => color || theme.COLORS.LIGHT_100 };
+  background-color: ${({ $bgColor, theme }) => $bgColor || theme.COLORS.TOMATO_100 };
+  color: ${({ $color, theme }) => $color || theme.COLORS.LIGHT_100 };
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -17,7 +17,7 @@ export const ToastMessage = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  opacity: ${(props) => (props.visible ? 1 : 0)};
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transition: opacity 0.5s ease;
 `;
 

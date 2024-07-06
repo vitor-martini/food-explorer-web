@@ -30,9 +30,9 @@ export function Toast({ toasts, removeToast }) {
       {visibleToasts.map((toast) => (
         <ToastMessage
           key={toast.id}
-          bgColor={toast.bgColor}
-          color={toast.color}
-          visible={toast.visible}
+          $bgColor={toast.bgColor}
+          $color={toast.color}
+          $visible={toast.visible}
         >
           {toast.message}
           <ToastCloseButton onClick={() => removeToast(toast.id)}>×</ToastCloseButton>

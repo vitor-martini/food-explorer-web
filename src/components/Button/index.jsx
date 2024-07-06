@@ -1,10 +1,11 @@
 import { Container } from "./styles";
 
-export function Button({ title, bgColor, width, icon: Icon, ...rest  }) {
+export function Button({ title, bgColor, width, padding, icon: Icon, ...rest  }) {
   return (
     <Container 
-      bgColor={bgColor} 
-      width={width}
+      $bgColor={bgColor} 
+      $width={width}
+      $padding={padding}
       { ...rest }
     >
       { Icon && <Icon />  }

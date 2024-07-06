@@ -3,6 +3,7 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   width: 100%;
+  margin-bottom: 8rem;
 `;
 
 export const HeroContainer = styled.div`
@@ -12,7 +13,7 @@ export const HeroContainer = styled.div`
     ${({ theme }) => theme.COLORS.DARK_900} 50%, 
     ${({ theme }) => theme.COLORS.DARK_1000} 100%
   );
-  margin: 8rem 0rem;
+  margin: 8rem 0rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
