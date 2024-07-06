@@ -6,12 +6,10 @@ export const Container = styled.footer`
   bottom: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 2.4rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_600};
-
+  text-align: right;
+  
   > p {
     color: ${({ theme }) => theme.COLORS.LIGHT_200 };
     font-size: 1.4rem;

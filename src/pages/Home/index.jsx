@@ -1,5 +1,6 @@
 import { Container, HeroContainer, Title, ImageWrapper, Image } from "./styles";
 import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
 import Hero from "../../assets/hero.svg";
 
 export function Home() {
@@ -15,6 +16,7 @@ export function Home() {
           <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
         </Title>
       </HeroContainer>
+      <Footer/>
     </Container>
   );
 }
