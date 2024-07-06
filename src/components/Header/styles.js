@@ -6,6 +6,7 @@ export const MobileContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 5.6rem 2.8rem 2.4rem;
+  background-color: ${({ theme }) => theme.COLORS.DARK_600};
 `;
 
 export const Notification = styled.div`
@@ -31,11 +32,12 @@ export const MenuWrapper = styled.div`
 `;
 
 export const Container = styled.div`
+  background-color: ${({ theme }) => theme.COLORS.DARK_600};
   display: flex;
   justify-content: center;
   gap: 3.6rem;
   align-items: center;
-  margin: 2.8rem;
+  padding: 2.8rem;
 `;
 
 export const Logo = styled.div`
