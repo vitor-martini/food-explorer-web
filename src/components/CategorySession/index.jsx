@@ -102,10 +102,13 @@ export function CategorySession({ categoryData }) {
         </NavButton>
         <CardContainer 
           ref={cardSessionRef} 
-          centerItems={centerItems}
+          $centerItems={centerItems}
         >
           {dishes.length > 0 && dishes.map(dish => (
-            <Card key={dish.id} dishData={dish} />
+            <Card 
+              key={dish.id} 
+              dishData={dish} 
+            />
           ))}
         </CardContainer>
         <NavButton 

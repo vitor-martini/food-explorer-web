@@ -29,7 +29,7 @@ export const CardContainer = styled.div`
   align-items: center;
   gap: 2.4rem;
   transition: transform 0.3s ease-in-out;
-  justify-content: ${({ centerItems }) => (centerItems ? "center" : "flex-start")};
+  justify-content: ${({ $centerItems }) => ($centerItems ? "center" : "flex-start")};
 `;
 
 export const NavButton = styled.button`

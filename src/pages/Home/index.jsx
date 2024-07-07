@@ -12,7 +12,6 @@ export function Home() {
   useEffect(() => {
     async function fetchCategories() {
       const response = await api.get("categories");
-      console.log(response.data);
       setCategories(response.data);
     }
 
