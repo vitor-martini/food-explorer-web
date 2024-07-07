@@ -9,13 +9,13 @@ const AppProviders = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <AuthProvider>
-        <ToastProvider>
+      <ToastProvider>
+        <AuthProvider>
           <CartProvider>
             {children}
           </CartProvider>
-        </ToastProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ToastProvider>
     </ThemeProvider>
   );
 };
