@@ -20,10 +20,31 @@ export const Container = styled.div`
 `;
 
 export const CardSession = styled.div`
+  overflow: hidden;
+  position: relative;
+`;
+
+export const CardContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 2.4rem;
-  border-radius: 8px;
-  overflow-x: auto;
+  transition: transform 0.3s ease-in-out;
+  justify-content: ${({ centerItems }) => (centerItems ? "center" : "flex-start")};
+`;
+
+export const NavButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 4rem;
+  cursor: pointer;
+  z-index: 1;
+  ${({ direction }) => (direction === "left" ? "left: 0;" : "right: 0;")}
+
+  &:disabled {
+    opacity: 0.5;
+  }
 `;

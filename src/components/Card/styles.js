@@ -10,6 +10,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 2.4rem;
   gap: 1.6rem;
+  border-radius: 8px;
 
   > h1 {
     font-size: 2.4rem;
