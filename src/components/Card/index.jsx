@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container, Dish, Options } from "./styles";
 import DishPlaceholder from "../../assets/dish.png";
 import { Heart } from "../../icons/Heart";
@@ -14,21 +14,11 @@ import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
 
 export function Card({ dishData }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(!!dishData.favorite_id);
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
   const photo = dishData.photo ? `${api.defaults.baseURL}/uploads/${dishData.photo}` : DishPlaceholder;
   const { user } = useAuth();
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    function isFavorite() {
-      setIsFavorite(!!dishData.favorite_id);
-    }
-
-    if (!user.is_admin) {
-      isFavorite();
-    }
-  }, []);
 
   function setIcon() {
     if(user.is_admin) {
