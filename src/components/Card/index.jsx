@@ -21,16 +21,14 @@ export function Card({ dishData }) {
   const navigate = useNavigate();
   
   useEffect(() => {
-    async function isFavorite() {
-      const response = await api.get(`/favorites/${dishData.id}`);
-      setIsFavorite(!!response.data.id);
+    function isFavorite() {
+      setIsFavorite(!!dishData.favorite_id);
     }
 
     if (!user.is_admin) {
       isFavorite();
     }
   }, []);
-
 
   function setIcon() {
     if(user.is_admin) {

@@ -14,7 +14,7 @@ export function CategorySession({ categoryData }) {
 
   useEffect(() => {
     async function fetchDishes() {
-      const response = await api.get(`dishes?category=${categoryData.name}`);
+      const response = await api.get(`auth-dishes?category=${categoryData.name}`);
       setDishes(response.data);
     }
 
