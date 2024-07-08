@@ -6,15 +6,15 @@ function CartProvider({ children }) {
   const [cart, setCart] = useState({ order: [] });
 
   function addToCart(dish) {
-    const newCart = [...cart, dish];
-    setCart({ order: newCart });
-    localStorage.setItem("@food-explorer:cart", JSON.stringify(cart));
+    const newCart = { order: [...cart.order, dish] };
+    setCart(newCart);
+    localStorage.setItem("@food-explorer:cart", JSON.stringify(newCart));
   }
 
   function removeFromCart(index) {
-    const newCart = cart.filter((_, i) => i !== index);
-    setCart({ order: newCart });
-    localStorage.setItem("@food-explorer:cart", JSON.stringify(cart));
+    const newCart = { order: cart.filter((_, i) => i !== index) };
+    setCart(newCart);
+    localStorage.setItem("@food-explorer:cart", JSON.stringify(newCart));
   }
 
   useEffect(() => {
