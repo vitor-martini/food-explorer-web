@@ -8,6 +8,7 @@ export const Container = styled.div`
   height: 100%;
   z-index: 999;
   transition: left 0.3s ease;
+  background-color: ${({ theme }) => theme.COLORS.DARK_500 };
 `;
 
 export const Header = styled.div`

@@ -36,6 +36,11 @@ export function Menu({ isOpen, toggleMenu }) {
               <li><Link to="/new">Novo prato</Link></li>
             )
           }
+          {
+            !user.is_admin && (
+              <li><Link to="/favorites">Meus favoritos</Link></li>
+            )
+          }
           <li onClick={logOut}>Sair</li>
         </ul>
       </Main>

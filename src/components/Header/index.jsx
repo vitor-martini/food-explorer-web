@@ -13,6 +13,7 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 import { useAuth } from "../../hooks/auth";
 import { useState } from "react";
 import { useCart } from "../../hooks/cart";
+import { Link } from "react-router-dom";
 
 export function Header() {
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
@@ -72,12 +73,18 @@ export function Header() {
   
             <Input
               icon={Search}
-              label={"Busque por pratos ou ingredients"}
+              label={"Busque por pratos ou ingredientes"}
+              placeholder={"Busque por pratos ou ingredientes"}
               inputId={"search"}
               phTextAlign={"center"}
               maxWidth={"600px"}
             />
-
+            {
+              !user.is_admin && 
+                ( 
+                  <Link to="/favorites">Meus favoritos</Link>
+                )
+            }
             {
               user.is_admin ? (<Button
                 title="Novo prato"
