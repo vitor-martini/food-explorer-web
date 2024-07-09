@@ -14,11 +14,13 @@ import { useAuth } from "../../hooks/auth";
 import { useState } from "react";
 import { useCart } from "../../hooks/cart";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
   const { user, logOut } = useAuth();
   const { cart } = useCart();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -86,9 +88,12 @@ export function Header() {
                 )
             }
             {
-              user.is_admin ? (<Button
-                title="Novo prato"
-              />) : 
+              user.is_admin ? (
+                <Button
+                  title="Novo prato"
+                  onClick={() => navigate("/edit")}
+                />
+              ) : 
               
               (<Button
                 icon={Receipt}
