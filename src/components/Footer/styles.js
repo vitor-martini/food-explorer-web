@@ -5,6 +5,7 @@ export const Container = styled.footer`
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 998;
   width: 100%;
   padding: 2.4rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_600};

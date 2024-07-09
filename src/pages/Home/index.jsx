@@ -20,8 +20,8 @@ export function Home() {
 
   return (
     <>
+      <Header />
       <Container>
-        <Header />
         <HeroContainer>
           <ImageWrapper>
             <Image src={Hero} />

@@ -2,6 +2,11 @@ import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const MobileContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 998;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,6 +37,12 @@ export const MenuWrapper = styled.div`
 `;
 
 export const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 998;
+
   background-color: ${({ theme }) => theme.COLORS.DARK_600};
   display: flex;
   justify-content: center;
