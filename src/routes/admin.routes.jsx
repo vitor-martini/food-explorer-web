@@ -6,7 +6,7 @@ import { History } from "../pages/History";
 import { Home } from "../pages/Home";
 import { Order } from "../pages/Order";
 
-export function AppRoutes() {
+export function AdminRoutes() {
   return (
     <Routes>
       <Route path="/dish" element={ <Dish/> }/>
