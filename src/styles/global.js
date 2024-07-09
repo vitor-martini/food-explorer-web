@@ -17,11 +17,15 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
   
-  body, input, button, textarea {
+  body, input, button, textarea, select {
      font-family: "Poppins", sans-serif;
      color: ${({ theme }) => theme.COLORS.LIGHT_100 };
      font-size: 1.6rem;
      outline: none;
+  }
+
+  option {
+    background-color: ${({ theme }) => theme.COLORS.DARK_900};
   }
 
   a {
