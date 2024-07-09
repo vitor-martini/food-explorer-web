@@ -11,7 +11,7 @@ export const ToastMessage = styled.div`
   background-color: ${({ $bgColor, theme }) => $bgColor || theme.COLORS.TOMATO_100 };
   color: ${({ $color, theme }) => $color || theme.COLORS.LIGHT_100 };
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
   display: flex;
