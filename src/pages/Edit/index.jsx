@@ -162,8 +162,7 @@ export function Edit() {
       <Header/>
       <Container>
         <BackButton/>
-        <h1>Adicionar prato</h1>
-
+        <h1>{isEditing ? "Editar" : "Adicionar"} prato</h1>
         <Section>
           <InputWrapper>
             <label htmlFor="photo">Imagem do prato</label>
