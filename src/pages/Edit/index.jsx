@@ -1,4 +1,4 @@
-import { Container, Section, InputWrapper, PhotoInput, PhotoInputWrapper } from "./styles";
+import { Container, Section, InputWrapper, PhotoInput, PhotoInputWrapper, Buttons } from "./styles";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { IconButton } from "../../components/IconButton";
@@ -39,19 +39,6 @@ export function Edit() {
     setDescription("");
   }
 
-  async function uploadPhoto(id) {
-    const photoUploadForm = new FormData();
-    console.log(photo);
-    photoUploadForm.append("photo", photo);
-
-    try {
-      await api.post(`/dishes/photo/${id}`, photoUploadForm);
-    } catch(error) {
-      const errorMessage = error.response.data.message;
-      throw new Error("Houve um problema ao cadastrar a foto do prato: " + errorMessage);
-    }
-  }
-
   async function handleAdd() {
     if(!name || !category || price === 0 || !description || ingredients.length === 0) {
       addToast("Preencha todos os campos!", toastTypes.ERROR);
@@ -83,10 +70,14 @@ export function Edit() {
 
       if(isEditing) {
         addToast("Atualizado com sucesso!", toastTypes.SUCCESS);
+        setTimeout(() => {
+          navigate(-1);
+        }, 1000);
       } else {
         addToast("Cadastrato com sucesso!", toastTypes.SUCCESS);
         clear();
       }
+      
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message;
       if(errorMessage) {
@@ -97,15 +88,23 @@ export function Edit() {
     }
   }
 
-  function handlePhoto(event) {
-    const file = event.target.files[0];
-    setPhoto(file);
-  }
-
   function handleCancelPhoto(event) {
     event.stopPropagation();
     photoInputRef.current.value = "";
     setPhoto(null);
+  }
+
+  async function handleDelete() {
+    await api.delete(`/dishes/${dishId}`);
+    addToast("Prato excluído com sucesso!", toastTypes.SUCCESS);
+    setTimeout(() => {
+      navigate(-1);
+    }, 1000);
+  }
+
+  function handlePhoto(event) {
+    const file = event.target.files[0];
+    setPhoto(file);
   }
 
   function handlePrice(event) {
@@ -125,6 +124,18 @@ export function Edit() {
   
     if (Number(formattedValue.replace(",", "."))) {
       setPrice(formattedValue);
+    }
+  }
+
+  async function uploadPhoto(id) {
+    const photoUploadForm = new FormData();
+    photoUploadForm.append("photo", photo);
+
+    try {
+      await api.post(`/dishes/photo/${id}`, photoUploadForm);
+    } catch(error) {
+      const errorMessage = error.response.data.message;
+      throw new Error("Houve um problema ao cadastrar a foto do prato: " + errorMessage);
     }
   }
 
@@ -234,11 +245,22 @@ export function Edit() {
             />
           </InputWrapper>
         </Section>
-        <Button
-          className={"saveButton"}
-          title={"Salvar alterações"}
-          onClick={handleAdd}
-        />
+        <Buttons
+         className={"saveButton"}>
+          {
+            isEditing && (
+              <Button
+                className={"saveButton"}
+                title={"Excluir"}
+                onClick={handleDelete}
+              />
+            )
+          }
+          <Button
+            title={"Salvar"}
+            onClick={handleAdd}
+          />
+        </Buttons>
       </Container>
       <Footer/>
     </>
