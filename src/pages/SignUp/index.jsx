@@ -9,11 +9,9 @@ import { useState } from "react";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../hooks/toast"; 
-import { useTheme } from "styled-components";
 
 export function SignUp() {
-  const { addToast } = useToast(); 
-  const theme = useTheme();
+  const { addToast, toastTypes } = useToast(); 
   const navigate = useNavigate();
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
   const [name, setName] = useState("");
@@ -22,19 +20,19 @@ export function SignUp() {
 
   async function handleSigUp() {
     if(!name || !email || !password || !email.includes("@")) {
-      addToast("Preencha todos os campos!", theme.COLORS.TOMATO_100);
+      addToast("Preencha todos os campos!", toastTypes.ERROR);
       return;
     }
     
     try {
       await api.post("/users", { name, email, password });
-      addToast("Cadastro efetuado com sucesso!", theme.COLORS.MINT_100, theme.COLORS.DARK_100);
+      addToast("Cadastro efetuado com sucesso!", toastTypes.SUCCESS);
       navigate("/");
     } catch (error) {
       if(error.response) {
-        addToast(error.response.data.message, theme.COLORS.TOMATO_100);
+        addToast(error.response.data.message, toastTypes.ERROR);
       } else {
-        addToast("Não foi possível cadastrar.", theme.COLORS.TOMATO_100);
+        addToast("Não foi possível cadastrar.", toastTypes.ERROR);
       }
     }
   }

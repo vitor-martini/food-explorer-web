@@ -8,19 +8,17 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast"; 
-import { useTheme } from "styled-components";
 
 export function Login() {
+  const { addToast, toastTypes } = useToast(); 
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { logIn } = useAuth();
-  const { addToast } = useToast(); 
-  const theme = useTheme();
 
   async function handleLogIn() {
     if (!email || !password) {
-      addToast("Preencha todos os campos!", theme.COLORS.TOMATO_100);
+      addToast("Preencha todos os campos!", toastTypes.ERROR);
       return;
     }
     await logIn({ email, password });

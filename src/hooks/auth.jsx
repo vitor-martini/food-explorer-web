@@ -1,13 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { useToast } from "./toast"; 
-import { useTheme } from "styled-components";
 
 export const AuthContext = createContext({});
 
-function AuthProvider({ children }) {
-  const { addToast } = useToast(); 
-  const theme = useTheme();
+function AuthProvider({ children }) {  
+  const { addToast, toastTypes } = useToast(); 
   const [user, setUser] = useState({});
 
   async function logIn({ email, password }) {
@@ -18,9 +16,9 @@ function AuthProvider({ children }) {
       localStorage.setItem("@food-explorer:user", JSON.stringify(user));
     } catch(error) {
       if(error.response) {
-        addToast(error.response.data.message, theme.COLORS.TOMATO_100);
+        addToast(error.response.data.message, toastTypes.ERROR);
       } else {
-        addToast("Não foi possível logar.", theme.COLORS.TOMATO_100);
+        addToast("Não foi possível logar.", toastTypes.ERROR);
       }
     }
   }

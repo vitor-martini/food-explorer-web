@@ -14,11 +14,9 @@ import { useAuth } from "../../hooks/auth";
 import { useCart } from "../../hooks/cart";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../hooks/toast"; 
-import { useTheme } from "styled-components";
 
 export function Card({ dishData }) {
-  const { addToast } = useToast(); 
-  const theme = useTheme();
+  const { addToast, toastTypes } = useToast(); 
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(!!dishData.favorite_id);
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
@@ -68,7 +66,7 @@ export function Card({ dishData }) {
       dishData.quantity = 1;
     }
     addToCart(dishData);  
-    addToast("Incluído sucesso!", theme.COLORS.MINT_100, theme.COLORS.DARK_100);
+    addToast("Incluído sucesso!", toastTypes.SUCCESS);
     setQuantity(1);
   }
 
