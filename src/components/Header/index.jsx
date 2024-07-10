@@ -27,6 +27,11 @@ export function Header() {
     setMenuOpen(!menuOpen);
   }
 
+  function handleLogOut() {
+    logOut();
+    navigate("/");
+  }
+
   return (
     <>
       {
@@ -103,7 +108,7 @@ export function Header() {
       
             <IconButton
               icon={Out}
-              onClick={logOut}
+              onClick={handleLogOut}
             />
           </Container>
         )
