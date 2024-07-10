@@ -10,6 +10,10 @@ export function SetIngredients({ ingredients, setIngredients }) {
   const [newIngredient, setNewIngredient] = useState("");
 
   function handleAddNewIngredientToList() {
+    if(!newIngredient) {
+      return;
+    }
+    
     setIngredients([...ingredients, newIngredient]);
     setNewIngredient("");
   }
