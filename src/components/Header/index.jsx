@@ -96,7 +96,7 @@ export function Header() {
               user.is_admin ? (
                 <Button
                   title="Novo prato"
-                  onClick={() => navigate("/edit")}
+                  onClick={() => navigate("/new")}
                 />
               ) : 
               

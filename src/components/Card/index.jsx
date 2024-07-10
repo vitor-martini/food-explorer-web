@@ -39,7 +39,7 @@ export function Card({ dishData }) {
 
   async function handleAction() {
     if(user.is_admin) {
-      navigate("/new");
+      navigate(`/edit/${dishData.id}`);
       return;
     }
 

@@ -11,16 +11,90 @@ import { Upload } from "../../icons/Upload";
 import { Close } from "../../icons/Close";
 import { useEffect, useRef, useState } from "react";
 import { api } from "../../services/api";
+import { useToast } from "../../hooks/toast"; 
+import { useParams, useNavigate } from "react-router-dom";
 
 export function Edit() {
+  const params = useParams();
+  const navigate = useNavigate();
+  const { addToast, toastTypes } = useToast(); 
+  const [isEditing, setIsEditing] = useState(false);
   const [photo, setPhoto] = useState(null);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [ingredients, setIngredients] = useState([]);
   const [price, setPrice] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [description, setDescription] = useState("");
   const [categories, setCategories] = useState([]);
+  const [dishId, setDishId] = useState(null);
   const photoInputRef = useRef(null);
 
+  function clear() {
+    photoInputRef.current.value = "";
+    setPhoto(null);
+    setName("");
+    setCategory(categories[0].id);
+    setIngredients([]);
+    setPrice("");
+    setDescription("");
+  }
+
+  async function uploadPhoto(id) {
+    const photoUploadForm = new FormData();
+    console.log(photo);
+    photoUploadForm.append("photo", photo);
+
+    try {
+      await api.post(`/dishes/photo/${id}`, photoUploadForm);
+    } catch(error) {
+      const errorMessage = error.response.data.message;
+      throw new Error("Houve um problema ao cadastrar a foto do prato: " + errorMessage);
+    }
+  }
+
   async function handleAdd() {
-    console.log("todo...");
+    if(!name || !category || price === 0 || !description || ingredients.length === 0) {
+      addToast("Preencha todos os campos!", toastTypes.ERROR);
+      return;
+    }
+
+    const dish = {
+      name,
+      category_id: category,
+      price: Number(price.replace(",", ".")),
+      description,
+      ingredients
+    };
+
+    try {
+      let id = dishId;
+
+      if(dishId) {
+        await api.put(`/dishes/${id}`, dish);
+      } else {
+        const response = await api.post("/dishes", dish);
+        id = response.data.id; 
+        setDishId(id);
+      }
+
+      if(photo) {
+        await uploadPhoto(id);
+      }
+
+      if(isEditing) {
+        addToast("Atualizado com sucesso!", toastTypes.SUCCESS);
+      } else {
+        addToast("Cadastrato com sucesso!", toastTypes.SUCCESS);
+        clear();
+      }
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message;
+      if(errorMessage) {
+        addToast(errorMessage, toastTypes.ERROR);
+      } else {
+        addToast("Houve um erro ao cadastrar o prato", toastTypes.ERROR);
+      }
+    }
   }
 
   function handlePhoto(event) {
@@ -58,8 +132,28 @@ export function Edit() {
     async function fetchCategories() {
       const result = await api.get("categories");
       setCategories(result.data);
+      setCategory(result.data[0].id);
     }
 
+    async function fetchDish(id) {
+      const result = await api.get(`/dishes/${id}`);
+      if(result.data) {
+        const dish = result.data;
+        setDishId(id);
+        setName(dish.name);
+        setCategory(dish.category.id);
+        setIngredients(dish.ingredients.map(ingredient => ingredient.name));
+        setPrice(dish.price.toString().replace(".", ","));
+        setDescription(dish.description);
+        setIsEditing(true);
+      } else {
+        navigate("/");
+      }
+    }
+
+    if(params.id) {
+      fetchDish(params.id);
+    }
     fetchCategories();
   }, []);
 
@@ -94,6 +188,8 @@ export function Edit() {
               label={"Nome"}
               inputId={"name"}
               placeholder={"Ex.: Salada Ceasar"}
+              onChange={e => setName(e.target.value)}
+              value={name}
             />
           </InputWrapper>
           <InputWrapper>
@@ -102,8 +198,8 @@ export function Edit() {
               label={"Categoria"}
               inputId={"category"}
               items={categories}
-              selectedOption={selectedCategory}
-              setSelectedOption={setSelectedCategory}
+              selectedOption={category}
+              setSelectedOption={setCategory}
             />
           </InputWrapper>
         </Section>
@@ -111,7 +207,10 @@ export function Edit() {
         <Section>
         <InputWrapper $flexOne={"1"}>
             <label>Ingredientes</label>
-            <SetIngredients/>
+            <SetIngredients
+              ingredients={ingredients}
+              setIngredients={setIngredients}
+            />
           </InputWrapper>
           <InputWrapper>
             <label htmlFor="price">Preço (R$)</label>
@@ -131,6 +230,8 @@ export function Edit() {
             <textarea 
               id="description"
               placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"  
+              onChange={e => setDescription(e.target.value)}
+              value={description}
             />
           </InputWrapper>
         </Section>

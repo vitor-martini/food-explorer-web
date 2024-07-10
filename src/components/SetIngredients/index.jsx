@@ -5,9 +5,8 @@ import { Close } from "../../icons/Close";
 import { useTheme } from "styled-components";
 import { useState } from "react";
 
-export function SetIngredients() {
+export function SetIngredients({ ingredients, setIngredients }) {
   const theme = useTheme();
-  const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
 
   function handleAddNewIngredientToList() {
