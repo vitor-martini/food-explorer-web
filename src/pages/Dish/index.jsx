@@ -12,6 +12,8 @@ import { Button } from "../../components/Button";
 import { useAuth } from "../../hooks/auth";
 import { useToast } from "../../hooks/toast"; 
 import { useCart } from "../../hooks/cart";
+import { useMediaQuery } from "react-responsive";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export function Dish() {
   const { addToast, toastTypes } = useToast(); 
@@ -21,6 +23,7 @@ export function Dish() {
   const params = useParams();
   const [dish, setDish] = useState({});   
   const [quantity, setQuantity] = useState(1);   
+  const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
   
   function handleQuantity(quantity) {
     setQuantity(quantity);
@@ -91,6 +94,7 @@ export function Dish() {
                   <Button
                     title={`incluir ∙ R$${formattedPrice}`}
                     onClick={handleInclude}
+                    padding={isMobile ? "1.2rem" : "1.2rem 2.4rem"}
                   />
                 </Options>
               )

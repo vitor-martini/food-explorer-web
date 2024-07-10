@@ -3,6 +3,10 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   padding: 14rem 8rem 16rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+    padding: 14rem 2rem 16rem;
+  }
 `;
 
 export const Content = styled.div`
@@ -10,6 +14,12 @@ export const Content = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 3.6rem;
+  margin-top: 3.6rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const Section = styled.div`
@@ -32,15 +42,40 @@ export const Section = styled.div`
   > button {
     margin-top: 2.4rem;
   }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+    margin-top: 0rem;
+    align-items: center;
+    > h1 {
+      font-size: 2.4rem;
+    }
+
+    > p {
+      font-size: 1.6rem;
+    }
+  }
 `;
 
 export const Ingredients = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   gap: 1.2rem;
 `;
 
 export const Photo = styled.img`
-  width: 30%;
+  width: 40rem;
+  height: 40rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+    width: 30rem;
+    height: 30rem;
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}px) {
+    width: 20rem;
+    height: 20rem;
+  } 
 `;
 
 export const Options = styled.div`
@@ -49,6 +84,6 @@ export const Options = styled.div`
   align-items: center;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
-      flex-direction: column;
+    justify-content: center;
   }
 `;
