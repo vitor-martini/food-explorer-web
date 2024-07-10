@@ -73,13 +73,21 @@ export function Card({ dishData }) {
   return (
     <Container>
       <Dish>
-        <img src={photo} alt="Prato" />
+        <img 
+          src={photo} 
+          alt={`Foto do prato ${dishData.name}`}
+          onClick={() => navigate(`/dish/${dishData.id}`)}
+        />
         <IconButton
           icon={setIcon()}
           onClick={handleAction}
         />
       </Dish>
-      <h1>{dishData.name}</h1>
+      <h1
+        onClick={() => navigate(`/dish/${dishData.id}`)}
+      >
+        {dishData.name}
+      </h1>
       {
         !isMobile && (
           <p>{ dishData.description }</p>

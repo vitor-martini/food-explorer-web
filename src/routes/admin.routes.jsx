@@ -9,7 +9,7 @@ import { Order } from "../pages/Order";
 export function AdminRoutes() {
   return (
     <Routes>
-      <Route path="/dish" element={ <Dish/> }/>
+      <Route path="/dish/:id" element={ <Dish/> }/>
       <Route path="/edit/:id" element={ <Edit/> }/>
       <Route path="/new" element={ <Edit/> }/>
       <Route path="/favorites" element={ <Favorites/> }/>

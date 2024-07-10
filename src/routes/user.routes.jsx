@@ -8,7 +8,7 @@ import { Order } from "../pages/Order";
 export function UserRoutes() {
   return (
     <Routes>
-      <Route path="/dish" element={ <Dish/> }/>
+      <Route path="/dish/:id" element={ <Dish/> }/>
       <Route path="/favorites" element={ <Favorites/> }/>
       <Route path="/history" element={ <History/> }/>
       <Route path="/" element={ <Home/> }/>

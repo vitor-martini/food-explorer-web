@@ -15,6 +15,7 @@ export const Container = styled.div`
   > h1 {
     font-size: 2.4rem;
     text-align: center;
+    cursor: pointer;
   }
 
   > p {
@@ -52,6 +53,7 @@ export const Dish = styled.div`
     width: 180px;
     height: 180px;
     border-radius: 8px;
+    cursor: pointer;
 
     @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
       width: 88px;
