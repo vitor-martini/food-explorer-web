@@ -44,6 +44,7 @@ export const Section = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+    gap: 2rem;
     margin-top: 0rem;
     align-items: center;
     > h1 {
@@ -54,6 +55,12 @@ export const Section = styled.div`
       font-size: 1.6rem;
     }
   }
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
 `;
 
 export const Ingredients = styled.div`
