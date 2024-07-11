@@ -17,6 +17,7 @@ export function Menu({ isOpen, toggleMenu }) {
   function handleSearch(event) {
     if(event.key === "Enter" && search) {
       navigate(`/search?name=${search}`);
+      toggleMenu();
     }
   }
 
