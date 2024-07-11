@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Dish, Options } from "./styles";
+import { Container, Photo, Options } from "./styles";
 import DishPlaceholder from "../../assets/dish.png";
 import { Heart } from "../../icons/Heart";
 import { FullHeart } from "../../icons/FullHeart";
@@ -72,7 +72,7 @@ export function Card({ dishData }) {
 
   return (
     <Container>
-      <Dish>
+      <Photo>
         <img 
           src={photo} 
           alt={`Foto do prato ${dishData.name}`}
@@ -82,7 +82,7 @@ export function Card({ dishData }) {
           icon={setIcon()}
           onClick={handleAction}
         />
-      </Dish>
+      </Photo>
       <h1
         onClick={() => navigate(`/dish/${dishData.id}`)}
       >
@@ -94,18 +94,22 @@ export function Card({ dishData }) {
         )
       }
       <h2>R$ {dishData.price.toString().replace(".", ",")}</h2>
-      <Options>
-        <Quantity
-          quantity={quantity}
-          setQuantity={handleQuantity}  
-        />
-        <Button
-          title={"incluir"}
-          width={isMobile ? "100%" : "auto"}
-          padding={isMobile ? "0.4rem 2.4rem" : "1.2rem 2.4rem"}
-          onClick={handleInclude}
-        />
-      </Options>
+      {
+        !user.is_admin && (
+          <Options>
+            <Quantity
+              quantity={quantity}
+              setQuantity={handleQuantity}  
+            />
+            <Button
+              title={"incluir"}
+              width={isMobile ? "100%" : "auto"}
+              padding={isMobile ? "0.4rem 2.4rem" : "1.2rem 2.4rem"}
+              onClick={handleInclude}
+            />
+          </Options>
+        )
+      }
     </Container>
   );
 }

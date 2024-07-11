@@ -4,15 +4,17 @@ import { Favorites } from "../pages/Favorites";
 import { History } from "../pages/History";
 import { Home } from "../pages/Home";
 import { Order } from "../pages/Order";
+import { Search } from "../pages/Search";
 
 export function UserRoutes() {
   return (
     <Routes>
-      <Route path="/dish/:id" element={ <Dish/> }/>
-      <Route path="/favorites" element={ <Favorites/> }/>
-      <Route path="/history" element={ <History/> }/>
       <Route path="/" element={ <Home/> }/>
+      <Route path="/dish/:id" element={ <Dish/> }/>
+      <Route path="/history" element={ <History/> }/>
+      <Route path="/favorites" element={ <Favorites/> }/>
       <Route path="/order" element={ <Order/> }/>
+      <Route path="/search" element={ <Search/> }/>
       <Route path="*" element={<Navigate to="/"/>}/>
     </Routes>
   );

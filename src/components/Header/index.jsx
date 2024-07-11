@@ -22,6 +22,7 @@ export function Header() {
   const { cart } = useCart();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -30,6 +31,12 @@ export function Header() {
   function handleLogOut() {
     logOut();
     navigate("/");
+  }
+
+  function handleSearch(event) {
+    if(event.key == "Enter" && search) {
+      navigate(`/search?name=${search}`);
+    }
   }
 
   return (
@@ -89,6 +96,8 @@ export function Header() {
               inputId={"search"}
               phTextAlign={"center"}
               maxWidth={"600px"}
+              onKeyPress={handleSearch}
+              onChange={e => setSearch(e.target.value)}
             />
             {
               !user.is_admin && 

@@ -2,13 +2,15 @@ import styled from "styled-components";
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
+  position: relative;
+  height: 46.2rem;
   max-width: 304px;
   background-color: ${({ theme }) => theme.COLORS.DARK_200 };
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2.4rem;
+  padding: 4rem;
   gap: 1.6rem;
   border-radius: 8px;
 
@@ -16,6 +18,7 @@ export const Container = styled.div`
     font-size: 2.4rem;
     text-align: center;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   > p {
@@ -29,9 +32,6 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.CAKE_100 };
     font-weight: 400;
   }
-
-  width: 30.4rem;
-  height: 46.2rem;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
     width: 21rem;
@@ -47,11 +47,11 @@ export const Container = styled.div`
   }
 `;
 
-export const Dish = styled.div`
-  position: relative;
+export const Photo = styled.div`
   > img {
     width: 180px;
     height: 180px;
+    margin: 0 1.6rem;
     border-radius: 8px;
     cursor: pointer;
 
@@ -63,8 +63,8 @@ export const Dish = styled.div`
 
   .icon-button {
     position: absolute;
-    top: 8px;
-    right: -32px;
+    top: 24px;
+    right: 24px;
   }
 `;
 
@@ -72,6 +72,7 @@ export const Options = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
       flex-direction: column;

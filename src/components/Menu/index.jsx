@@ -6,9 +6,24 @@ import { Search } from "../../icons/Search";
 import { Input } from "../Input";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Menu({ isOpen, toggleMenu }) {
   const { user, logOut } = useAuth();
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  function handleSearch(event) {
+    if(event.key === "Enter" && search) {
+      navigate(`/search?name=${search}`);
+    }
+  }
+
+  function handleLogOut() {
+    logOut();
+    navigate("/");
+  }
 
   return (
     <Container
@@ -28,8 +43,9 @@ export function Menu({ isOpen, toggleMenu }) {
           inputId={"search"}
           placeholder={"Busque por pratos ou ingredients"}
           width={"100%"}
+          onKeyPress={handleSearch}
+          onChange={e => setSearch(e.target.value)}
         />
-
         <ul>
           {
             user.is_admin && (
@@ -41,7 +57,7 @@ export function Menu({ isOpen, toggleMenu }) {
               <li><Link to="/favorites">Meus favoritos</Link></li>
             )
           }
-          <li onClick={logOut}>Sair</li>
+          <li onClick={handleLogOut}>Sair</li>
         </ul>
       </Main>
 
