@@ -12,20 +12,32 @@ export function Search() {
   const params = new URLSearchParams(location.search);
   const searchName = params.get("name");
   const navigate = useNavigate();
-  const [dishes, setDishes] = useState([]);
+  const [searchDishes, setSearchDishes] = useState([]);
 
   useEffect(() => {
+    async function fetchFavorites() {
+      const response = await api.get("/favorites");
+      const favorites = response.data.map(favorite => {
+        favorite.dishes.favorite_id = favorite.id;
+        return favorite.dishes;
+      });
+      setSearchDishes(favorites);
+    }
+
     async function fetchDishes() {
-      const response = await api.get(`/dishes?name=${searchName}`);
-      setDishes(response.data);
-      console.log(response.data);
+      const response = await api.get(`/auth-dishes?name=${searchName}`);
+      setSearchDishes(response.data);
     }
-
-    if(!searchName) {
-      navigate("/");
+    
+    if (location.pathname.startsWith("/favorites")) {
+      fetchFavorites();
+    } else if (location.pathname.startsWith("/search")) {
+      if(!searchName) {
+        navigate("/");
+      }
+      fetchDishes();
     }
-
-    fetchDishes();
+    
   }, [searchName]);
 
   return (
@@ -33,15 +45,17 @@ export function Search() {
       <Header/>
       <Container> 
         {
-          dishes.length > 0 ? (
+          searchDishes.length > 0 ? (
             <CardContainer>
               {
-                dishes.map(dish => (
+                searchDishes.map(dish => { 
+                  console.log(dish);
+                  return (
                   <Card
                     key={dish.id}
                     dishData={dish}
                   />
-                ))
+                );})
               }
             </CardContainer>
           ) : (
