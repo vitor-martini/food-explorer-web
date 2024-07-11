@@ -73,6 +73,7 @@ export const Ingredients = styled.div`
 export const Photo = styled.img`
   width: 40rem;
   height: 40rem;
+  border-radius: 8px;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
     width: 30rem;
