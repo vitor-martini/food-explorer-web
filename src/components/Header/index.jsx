@@ -45,7 +45,9 @@ export function Header() {
               isOpen={menuOpen}
               toggleMenu={toggleMenu}
             />
-            <Logo>
+            <Logo
+              onClick={() => navigate("/")}
+            >
               <img src={logo} alt="Logo" />
               <Title>
                 <h1>food explorer</h1>
@@ -68,7 +70,9 @@ export function Header() {
           </MobileContainer>
         ) : (
           <Container>
-            <Logo>
+            <Logo
+              onClick={() => navigate("/")}
+            >
               <img src={logo} alt="Logo" />
               <Title>
                 <h1>food explorer</h1>
