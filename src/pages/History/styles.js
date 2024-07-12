@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   padding: 14rem 12rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
+    padding: 14rem 3.6rem;
+  }
 
   > h1 {
     font-size: 3.2rem;
@@ -56,5 +61,26 @@ export const Container = styled.div`
 
   .entregue {
     background-color: ${({ theme }) => theme.COLORS.MINT_100};
+  }
+`;
+
+export const Card = styled.div`
+  border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+  padding: 1.6rem;
+  margin-bottom: 1.6rem;
+  border-radius: 8px;
+`;
+
+export const CardHeader = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
   }
 `;
