@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
-  padding: 1.2rem 1.6rem;
+  padding: ${({ $padding }) => $padding || "1.2rem 1.6rem" };
   border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  width: 100%;
+  width: ${({ $width }) => $width || "100%" };
 
   > select {
     background-color: transparent;

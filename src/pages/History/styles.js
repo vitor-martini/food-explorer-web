@@ -84,3 +84,10 @@ export const CardHeader = styled.div`
     gap: 0.8rem;
   }
 `;
+
+export const Section = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+`;

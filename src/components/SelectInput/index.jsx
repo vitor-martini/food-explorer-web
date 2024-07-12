@@ -1,8 +1,11 @@
 import { Container } from "./styles";
 
-export function SelectInput({ label, inputId, items, selectedOption, setSelectedOption, ...rest }) {
+export function SelectInput({ label, inputId, items, selectedOption, setSelectedOption, width, padding, ...rest }) {
   return (
-    <Container>
+    <Container 
+      $width={width}
+      $padding={padding}
+      >
       <label className="sr-only" htmlFor={ inputId }> { label }</label>
       <select 
         id={ inputId } 
