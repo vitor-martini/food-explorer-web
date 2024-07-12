@@ -105,6 +105,7 @@ export function Header() {
                   <Link to="/favorites">Meus favoritos</Link>
                 )
             }
+            <Link to="/history">Pedidos</Link>
             {
               user.is_admin ? (
                 <Button

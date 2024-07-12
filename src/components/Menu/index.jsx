@@ -58,6 +58,7 @@ export function Menu({ isOpen, toggleMenu }) {
               <li><Link to="/favorites">Meus favoritos</Link></li>
             )
           }
+          <li><Link to="/history">Pedidos</Link></li>
           <li onClick={handleLogOut}>Sair</li>
         </ul>
       </Main>
