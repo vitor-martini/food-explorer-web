@@ -14,7 +14,7 @@ function CartProvider({ children }) {
   }
 
   function removeFromCart(index) {
-    const newCart = { order: cart.filter((_, i) => i !== index) };
+    const newCart = { order: cart.order.filter((_, i) => i !== index) };
     setCart(newCart);
     localStorage.setItem(`@food-explorer:cart-${user.id}`, JSON.stringify(newCart));
   }
