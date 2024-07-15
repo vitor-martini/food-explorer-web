@@ -69,6 +69,7 @@ export function Header() {
                   <MenuWrapper>
                     <IconButton
                       icon={Receipt}
+                      onClick={() => navigate("/order")}
                     /> 
                     <Notification>{cart.order.length}</Notification>
                   </MenuWrapper>
@@ -116,7 +117,8 @@ export function Header() {
               
               (<Button
                 icon={Receipt}
-                title={`Pedidos (${cart.order.length})`}
+                title={`Sacola (${cart.order.length})`}
+                onClick={() => navigate("/order")}
               />) 
             }
       
