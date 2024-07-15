@@ -5,7 +5,7 @@ export const Container = styled.button`
   border-radius: 8px;
   width: ${({ $width }) => $width || "auto" };
   background-color: ${({ $bgColor, theme }) => $bgColor || theme.COLORS.TOMATO_100 };
-  color: ${({ theme }) => theme.COLORS.LIGHT_100 };
+  color: ${({ $color, theme }) => $color || theme.COLORS.LIGHT_100 };
   display: flex;
   align-items: center;
   justify-content: center;
