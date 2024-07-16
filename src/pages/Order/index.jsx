@@ -1,14 +1,8 @@
-import {
-  Container,
-  OrderContainer,
-  DishContainer,
-  DishContent,
-  DishDetails,
-  NotFoundContainer,
-} from "./styles";
+import { Container, OrderContainer, DishContainer, DishContent, DishDetails, NotFoundContainer, Section } from "./styles";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Button } from "../../components/Button";
+import { Payment } from "../../components/Payment";
 import { api } from "../../services/api";
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
@@ -63,30 +57,36 @@ export function Order() {
       <Header />
       <Container>
         {orders.length > 0 ? (
-          <>
-            <h1>Meu pedido</h1>
-            <OrderContainer>
-              {orders.map((o, index) => (
-                <DishContainer key={index}>
-                  <img src={o.photo} alt={`Foto do prato ${o.name}`} />
-                  <DishContent>
-                    <DishDetails>
-                      <p>{`${o.quantity} x ${o.name}`}</p>
-                      <p className="price">{`R$ ${o.price}`}</p>
-                    </DishDetails>
-                    <Button
-                      title={"Excluir"}
-                      bgColor={"transparent"}
-                      color={theme.COLORS.TOMATO_400}
-                      padding={"0px"}
-                      onClick={() => handleDelete(index)}
-                    />
-                  </DishContent>
-                </DishContainer>
-              ))}
-              <h2>{`Total: R$ ${total.toFixed(2).replace(".", ",")}`}</h2>
-            </OrderContainer>
-          </>
+          <Section>
+            <div>
+              <h1>Meu pedido</h1>
+              <OrderContainer>
+                {orders.map((o, index) => (
+                  <DishContainer key={index}>
+                    <img src={o.photo} alt={`Foto do prato ${o.name}`} />
+                    <DishContent>
+                      <DishDetails>
+                        <p>{`${o.quantity} x ${o.name}`}</p>
+                        <p className="price">{`R$ ${o.price}`}</p>
+                      </DishDetails>
+                      <Button
+                        title={"Excluir"}
+                        bgColor={"transparent"}
+                        color={theme.COLORS.TOMATO_400}
+                        padding={"0px"}
+                        onClick={() => handleDelete(index)}
+                      />
+                    </DishContent>
+                  </DishContainer>
+                ))}
+                <h2>{`Total: R$ ${total.toFixed(2).replace(".", ",")}`}</h2>
+              </OrderContainer>
+            </div>
+            <div>
+              <h1>Pagamento</h1>
+              <Payment dishes={orders}/>
+            </div>
+        </Section>
         ) : (
           <NotFoundContainer>
             <h1>Sacola vazia!</h1>

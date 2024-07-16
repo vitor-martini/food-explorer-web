@@ -24,6 +24,7 @@ export const OrderContainer = styled.div`
   > h2 {
     font-size: 2rem;
     font-weight: 600;
+    padding: 1.6rem 0;
   }
 `;
 
@@ -73,4 +74,9 @@ export const NotFoundContainer = styled.div`
   > h1 {
     text-align: center;
   }
+`;
+
+export const Section = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;

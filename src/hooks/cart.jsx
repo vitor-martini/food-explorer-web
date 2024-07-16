@@ -19,6 +19,10 @@ function CartProvider({ children }) {
     localStorage.setItem(`@food-explorer:cart-${user.id}`, JSON.stringify(newCart));
   }
 
+  function resetCart() {
+    localStorage.removeItem(`@food-explorer:cart-${user.id}`);
+  }
+
   useEffect(() => {
     if(!user || !user.id) {
       return;
@@ -33,7 +37,7 @@ function CartProvider({ children }) {
   }, [user]);
 
   return (
-    <CartContext.Provider value={{ addToCart, removeFromCart, cart }}>
+    <CartContext.Provider value={{ addToCart, removeFromCart, resetCart, cart }}>
       { children }
     </CartContext.Provider>
   );

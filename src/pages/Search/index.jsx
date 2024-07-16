@@ -49,7 +49,6 @@ export function Search() {
             <CardContainer>
               {
                 searchDishes.map(dish => { 
-                  console.log(dish);
                   return (
                   <Card
                     key={dish.id}

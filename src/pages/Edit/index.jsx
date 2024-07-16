@@ -29,10 +29,6 @@ export function Edit() {
   const [dishId, setDishId] = useState(null);
   const photoInputRef = useRef(null);
 
-  useEffect(() => {
-    console.log(category);
-  }, [category]);
-
   function clear() {
     photoInputRef.current.value = "";
     setPhoto(null);
