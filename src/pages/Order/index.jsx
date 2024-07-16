@@ -19,6 +19,7 @@ export function Order() {
   const { cart, removeFromCart } = useCart();
   const [orders, setOrder] = useState([]);
   const [total, setTotal] = useState(0);
+  const [showPayment, setShowPayment] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
 
   function handleDelete(index) {
@@ -58,34 +59,52 @@ export function Order() {
       <Container>
         {orders.length > 0 ? (
           <Section>
-            <div>
-              <h1>Meu pedido</h1>
-              <OrderContainer>
-                {orders.map((o, index) => (
-                  <DishContainer key={index}>
-                    <img src={o.photo} alt={`Foto do prato ${o.name}`} />
-                    <DishContent>
-                      <DishDetails>
-                        <p>{`${o.quantity} x ${o.name}`}</p>
-                        <p className="price">{`R$ ${o.price}`}</p>
-                      </DishDetails>
-                      <Button
-                        title={"Excluir"}
-                        bgColor={"transparent"}
-                        color={theme.COLORS.TOMATO_400}
-                        padding={"0px"}
-                        onClick={() => handleDelete(index)}
+              {
+                !(isMobile && showPayment) && (
+                  <div>
+                    <h1>Meu pedido</h1>
+                    <OrderContainer>
+                      {orders.map((o, index) => (
+                        <DishContainer key={index}>
+                          <img src={o.photo} alt={`Foto do prato ${o.name}`} />
+                          <DishContent>
+                            <DishDetails>
+                              <p>{`${o.quantity} x ${o.name}`}</p>
+                              <p className="price">{`R$ ${o.price}`}</p>
+                            </DishDetails>
+                            <Button
+                              title={"Excluir"}
+                              bgColor={"transparent"}
+                              color={theme.COLORS.TOMATO_400}
+                              padding={"0px"}
+                              onClick={() => handleDelete(index)}
+                            />
+                          </DishContent>
+                        </DishContainer>
+                      ))}
+                      <h2>{`Total: R$ ${total.toFixed(2).replace(".", ",")}`}</h2>
+                    </OrderContainer>
+                    {
+                      isMobile && (
+                        <Button
+                          title={"Avançar"}
+                          width={"100%"}
+                          padding={"1.6rem"}
+                          onClick={() => setShowPayment(!showPayment)}
                       />
-                    </DishContent>
-                  </DishContainer>
-                ))}
-                <h2>{`Total: R$ ${total.toFixed(2).replace(".", ",")}`}</h2>
-              </OrderContainer>
-            </div>
-            <div>
-              <h1>Pagamento</h1>
-              <Payment dishes={orders}/>
-            </div>
+                      )
+                    }
+                  </div>
+                ) 
+              }
+            {
+              (!isMobile || showPayment) && (
+                <div>
+                  <h1>Pagamento</h1>
+                  <Payment dishes={orders}/>
+                </div>
+              )
+            }
         </Section>
         ) : (
           <NotFoundContainer>

@@ -75,7 +75,7 @@ export function Payment({ dishes }) {
               inputId={"card-number"}
               placeholder={"0000 0000 0000 0000"}
               onChange={(e) => numericMask(e)}
-              maxlength="16"
+              maxLength="16"
             />
           </InputWrapper>
           <Section>
@@ -85,7 +85,7 @@ export function Payment({ dishes }) {
                 label={"Validade"}
                 inputId={"expiration-date"}
                 placeholder={"04/25"}
-                maxlength="4"
+                maxLength="4"
               />
             </InputWrapper>
             <InputWrapper>
@@ -94,7 +94,7 @@ export function Payment({ dishes }) {
                 label={"CVC"}
                 inputId={"cvc"}
                 placeholder={"000"}
-                maxlength="3"
+                maxLength="3"
               />
             </InputWrapper>
           </Section>

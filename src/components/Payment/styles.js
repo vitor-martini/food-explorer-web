@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   width: 530px;
@@ -6,6 +7,10 @@ export const Container = styled.div`
   border-radius: 8px;
   border: 2px solid ${({ theme }) => theme.COLORS.LIGHT_600 };
   overflow: hidden; 
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}px) {
+    width: 400px;
+  } 
 `;
 
 export const PaymentMethods = styled.div`
@@ -20,11 +25,6 @@ export const PaymentMethods = styled.div`
 
   > button {
     border-bottom: 2px solid ${({ theme }) => theme.COLORS.LIGHT_600 };
-  }
-
-  > button:first-child,
-  > button:last-child {
-    border-radius: 0;
   }
 `;
 
@@ -41,6 +41,10 @@ export const CreditCardDetails = styled.div`
   align-items: center;
   gap: 1.6rem;
   padding: 10rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}px) {
+    padding: 4rem;
+  } 
 `;
 
 export const InputWrapper = styled.div`

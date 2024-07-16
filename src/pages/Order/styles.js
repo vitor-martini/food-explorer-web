@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
-  padding: 14rem 12rem;
-
-  @media (max-width: ${DEVICE_BREAKPOINTS.MD}px) {
-    padding: 14rem 3.6rem;
-  }
+  padding: 14rem 3.6rem;
 
   h1 {
     font-size: 3.2rem;
