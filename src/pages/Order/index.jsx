@@ -22,11 +22,6 @@ export function Order() {
   const [showPayment, setShowPayment] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: DEVICE_BREAKPOINTS.MD });
 
-  function handleDelete(index) {
-    removeFromCart(index);
-    addToast("Removido sucesso!", toastTypes.SUCCESS);
-  }
-
   useEffect(() => {
     async function fetchDishes() {
       const orderPromises = cart.order.map(async (o) => {
@@ -53,63 +48,70 @@ export function Order() {
     fetchDishes();
   }, [cart]);
 
+  function handleDelete(index) {
+    removeFromCart(index);
+    addToast("Removido com sucesso!", toastTypes.SUCCESS);
+  }
+
+  function OrderSummary() {
+    return (
+      <div>
+        <h1>Meu pedido</h1>
+        <OrderContainer>
+          {orders.map((o, index) => (
+            <DishContainer key={index}>
+              <img src={o.photo} alt={`Foto do prato ${o.name}`} />
+              <DishContent>
+                <DishDetails>
+                  <p>{`${o.quantity} x ${o.name}`}</p>
+                  <p className="price">{`R$ ${o.price}`}</p>
+                </DishDetails>
+                <Button
+                  title={"Excluir"}
+                  bgColor={"transparent"}
+                  color={theme.COLORS.TOMATO_400}
+                  padding={"0px"}
+                  onClick={() => handleDelete(index)}
+                />
+              </DishContent>
+            </DishContainer>
+          ))}
+          <h2>{`Total: R$ ${total.toFixed(2).replace(".", ",")}`}</h2>
+        </OrderContainer>
+        {isMobile && (
+          <Button
+            title={"Avançar"}
+            width={"100%"}
+            padding={"1.6rem"}
+            onClick={() => setShowPayment(!showPayment)}
+          />
+        )}
+      </div>
+    );
+  } 
+
+  function PaymentSection (){
+    return (
+      <div>
+        <h1>Pagamento</h1>
+        <Payment dishes={orders} />
+      </div>
+    );
+  }
+
   return (
     <>
       <Header />
       <Container>
         {orders.length > 0 ? (
           <Section>
-              {
-                !(isMobile && showPayment) && (
-                  <div>
-                    <h1>Meu pedido</h1>
-                    <OrderContainer>
-                      {orders.map((o, index) => (
-                        <DishContainer key={index}>
-                          <img src={o.photo} alt={`Foto do prato ${o.name}`} />
-                          <DishContent>
-                            <DishDetails>
-                              <p>{`${o.quantity} x ${o.name}`}</p>
-                              <p className="price">{`R$ ${o.price}`}</p>
-                            </DishDetails>
-                            <Button
-                              title={"Excluir"}
-                              bgColor={"transparent"}
-                              color={theme.COLORS.TOMATO_400}
-                              padding={"0px"}
-                              onClick={() => handleDelete(index)}
-                            />
-                          </DishContent>
-                        </DishContainer>
-                      ))}
-                      <h2>{`Total: R$ ${total.toFixed(2).replace(".", ",")}`}</h2>
-                    </OrderContainer>
-                    {
-                      isMobile && (
-                        <Button
-                          title={"Avançar"}
-                          width={"100%"}
-                          padding={"1.6rem"}
-                          onClick={() => setShowPayment(!showPayment)}
-                      />
-                      )
-                    }
-                  </div>
-                ) 
-              }
-            {
-              (!isMobile || showPayment) && (
-                <div>
-                  <h1>Pagamento</h1>
-                  <Payment dishes={orders}/>
-                </div>
-              )
-            }
-        </Section>
+            {!(isMobile && showPayment) && <OrderSummary />}
+            {(!isMobile || showPayment) && <PaymentSection />}
+          </Section>
         ) : (
           <NotFoundContainer>
             <h1>Sacola vazia!</h1>
-            <img src={NotFoundIcon} />
+            <img src={NotFoundIcon} alt="Sacola vazia" />
           </NotFoundContainer>
         )}
       </Container>
