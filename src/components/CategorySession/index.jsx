@@ -9,8 +9,6 @@ export function CategorySession({ categoryData }) {
   const [isScrollable, setIsScrollable] = useState(false);
   const [centerItems, setCenterItems] = useState(false);
   const cardSessionRef = useRef(null);
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
 
   useEffect(() => {
     async function fetchDishes() {
@@ -67,32 +65,10 @@ export function CategorySession({ categoryData }) {
     }
   }
 
-  function handleTouchStart(e) {
-    touchStartX.current = e.touches[0].clientX;
-  }
-
-  function handleTouchMove(e) {
-    touchEndX.current = e.touches[0].clientX;
-  }
-
-  function handleTouchEnd() {
-    if (touchStartX.current - touchEndX.current > 50) {
-      handleNext();
-    }
-
-    if (touchStartX.current - touchEndX.current < -50) {
-      handlePrev();
-    }
-  }
-
   return (
     <Container>
       <h1>{categoryData.name}</h1>
-      <CardSession
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <CardSession>
         <NavButton 
           direction="left" 
           onClick={handlePrev} 
