@@ -31,6 +31,7 @@ export function Dish() {
   function handleQuantity(quantity) {
     setQuantity(quantity);
     dish.quantity = quantity;
+    dish.formattedPrice = (dish.quantity * dish.price).toFixed(2).replace(".", ",");
     setDish(dish);
   }
 
@@ -41,9 +42,8 @@ export function Dish() {
     addToCart(dish);  
     addToast("Incluído sucesso!", toastTypes.SUCCESS);
     setQuantity(1);
+    dish.formattedPrice = (1 * dish.price).toFixed(2).replace(".", ",");
   }
-  
-  const formattedPrice = (dish.quantity * dish.price).toFixed(2).replace(".", ",");
   
   function setIcon() {
     if(dish.isFavorite) {
@@ -78,6 +78,7 @@ export function Dish() {
         dish.photo = dish.photo ? `${api.defaults.baseURL}/uploads/${dish.photo}` : DishPlaceholder;
         dish.quantity = 1;
         dish.ingredients = dish.ingredients.map(ingredient => ingredient.name);
+        dish.formattedPrice = (dish.quantity * dish.price).toFixed(2).replace(".", ",");
 
         if(!user.is_admin) {
           const fetchFavorite = await api.get(`/favorites/${params.id}`);
@@ -135,7 +136,7 @@ export function Dish() {
                     setQuantity={handleQuantity}  
                   />
                   <Button
-                    title={`incluir ∙ R$${formattedPrice}`}
+                    title={`incluir ∙ R$${dish.formattedPrice}`}
                     onClick={handleInclude}
                     padding={isMobile ? "1.2rem" : "1.2rem 2.4rem"}
                   />
